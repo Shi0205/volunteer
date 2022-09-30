@@ -38,7 +38,7 @@
           <form>
               <div class="form-row" >
                <div class="form-group col-md-6"  style="padding-left: 0px;" >
-                 <label for="inputEmail4">First Name: </label>
+                 <label for="fname">First Name: </label>
                  <input type="fname" class="form-control" id="fname" placeholder="First Name" required>
                </div>
                <div class="form-group col-md-6" >
