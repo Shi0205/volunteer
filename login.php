@@ -41,7 +41,7 @@
             <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" style="width: 40%" class="img-responsive">
           </center>
           <center>
-            <form action="action.php" method="post" class="form-horizontal">
+            <form action="login_action.php" method="post" class="form-horizontal">
             <div class="form-group">
               <div class="col-sm-8 col-sm-offset-2">
                 <input type="text" name="email" class="form-control" id="email" placeholder="Enter the Email"  required> 
@@ -56,9 +56,9 @@
 
             <div class="form-group">
               <br>
-              <div class="col-md-offset-3  col-sm-6">
+              <div class="col-md-offset-3  col-sm-6 col-sm-offset-3">
                 <p><p>
-                <button class="btn btn-primary btn-lg btn-block" id="btnsign" type="submit" name="login" >Login</button>
+                <button class="btn btn-primary btn-lg btn-block" id="btnsign" type="submit" name="login" style="center">Login</button>
               </div>    
             </div>
           </form>
