@@ -1,3 +1,3 @@
 # volunteer
 
-This is a simple website.
+Simple code.
