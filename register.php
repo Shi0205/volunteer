@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8">https://github.com/Shi0205/volunteer/blob/main/register.php
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -35,7 +35,7 @@
       </div>
       
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 ">
-          <form>
+          <form action="reg_action.php" method="post">
               <div class="form-row" >
                <div class="form-group col-md-6"  style="padding-left: 0px;" >
                  <label for="fname">First Name: </label>
@@ -66,6 +66,10 @@
                   </small>
             </div>
             
+             <div class="form-group">
+              <label for="confirmpassword">Confirm Password : </label>
+              <input type="password" class="form-control" id="confirmpassword" placeholder="Repeat the Password" required>
+            </div>
               
             
             <div class="form-group"> 
@@ -88,7 +92,7 @@
               <textarea class="form-control" col="50" row="4" id="address" name="address" required ></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg btn-block " id="btnregister" name="register">Register</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block " id="btnregister" name="register" onClick="">Register</button>
           </form>
         
 
@@ -98,6 +102,23 @@
   </div> <!-- container -->
 
 </form>
+
+<script >
+    var password = document.getElementById("password");
+    var confirmpassword = document.getElementById("confirmpassword");
+
+function validatePassword(){
+  if(password.value != confirmpassword.value) {
+    confirmpassword.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirmpassword.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword();
+confirmpassword.onkeyup = validatePassword();
+
+</script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
