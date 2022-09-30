@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">https://github.com/Shi0205/volunteer/blob/main/register.php
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -39,22 +39,22 @@
               <div class="form-row" >
                <div class="form-group col-md-6"  style="padding-left: 0px;" >
                  <label for="fname">First Name: </label>
-                 <input type="fname" class="form-control" id="fname" placeholder="First Name" required>
+                 <input type="fname" class="form-control" name="fname" id="fname" placeholder="First Name" required>
                </div>
                <div class="form-group col-md-6" >
                    <label for="lname">Last Name: </label>
-                   <input type="lname" class="form-control" id="lname" placeholder="Last Name" required >
+                   <input type="lname" class="form-control" name="lname" id="lname" placeholder="Last Name" required >
                </div>
             </div>
               
             <div class="form-group">
               <label for="email">Email address : </label>
-              <input type="email" class="form-control" id="email"  placeholder="Enter email" required focus>
+              <input type="email" class="form-control" id="email" name="email"  placeholder="Enter email" required focus>
             </div>
             
             <div class="form-group">
               <label for="password">Password : </label>
-              <input type="password" class="form-control" id="password" placeholder="Password" aria-describedby="passwordhelp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
+              <input  type="password" class="form-control" name="password" id="password" placeholder="Password" aria-describedby="passwordhelp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
               <small id="passwordhelp" class="form-text text-muted">
                   <ul>
                       <li>At least 1 Uppercase</li>
@@ -68,7 +68,7 @@
             
              <div class="form-group">
               <label for="confirmpassword">Confirm Password : </label>
-              <input type="password" class="form-control" id="confirmpassword" placeholder="Repeat the Password" required>
+              <input type="password" class="form-control" name="confimpassword" id="confirmpassword" placeholder="Repeat the Password" required>
             </div>
               
             
