@@ -27,7 +27,7 @@ if(isset($_POST['register'])){
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $email = $_POST['email'];
-            $pswd = $_POST['pswd'];
+            $pswd = $_POST['passwordd'];
             $gender = $_POST['gender'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
