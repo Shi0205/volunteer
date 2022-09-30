@@ -56,14 +56,14 @@
             
             <div class="form-group">
               <label for="pswd">Password : </label>
-              <input  type="password" class="form-control" name="pswd" id="pswd" placeholder="Enter the Password" aria-describedby="pswdhelp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
+              <input  type="password" class="form-control" name="passwordd" id="password" placeholder="Enter the Password" aria-describedby="pswdhelp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$" required>
               <small id="pswdhelp" class="form-text text-muted">
                   <ul>
                       <li>At least 1 Uppercase</li>
                       <li>At least 1 Lowercase</li>
                       <li>At least 1 Number</li>
                       <li>At least 1 Symbol, symbol allowed --> !@#$%^&*_=+-</li>
-                      <li>Min 8 chars and Max 12 chars</li>
+                      <li>Min 8 chars and Max 20 chars</li>
                   </ul>
                   </small>
             </div>
@@ -107,19 +107,18 @@
 </form>
 
   <script type="text/javascript">
-    var pswd = document.getElementById("pswd");
+    var password = document.getElementById("password");
     var confirmpassword = document.getElementById("confirmpassword");
-    var test = document.getElementById("test");
-
+    
 function validatePassword(){
-  if(pswd.value != confirmpassword.value) {
+  if(password.value != confirmpassword.value) {
     confirmpassword.setCustomValidity("Passwords Don't Match");
   } else {
     confirmpassword.setCustomValidity('');
   }
 }
 
-pswd.onchange = validatePassword;
+password.onchange = validatePassword;
 confirmpassword.onkeyup = validatePassword;
 
 
