@@ -88,7 +88,7 @@
               <textarea class="form-control" col="50" row="4" id="address" name="address" required ></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg btn-block ">Register</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block " id="btnregister" name="register">Register</button>
           </form>
         
 
