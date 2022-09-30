@@ -17,6 +17,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
   </script>
   
+
+
   <style type="text/css">
   html {
       margin-bottom :50px;
@@ -53,9 +55,9 @@
             </div>
             
             <div class="form-group">
-              <label for="password">Password : </label>
-              <input  type="password" class="form-control" name="password" id="password" placeholder="Password" aria-describedby="passwordhelp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
-              <small id="passwordhelp" class="form-text text-muted">
+              <label for="pswd">Password : </label>
+              <input  type="password" class="form-control" name="pswd" id="pswd" placeholder="Enter the Password" aria-describedby="pswdhelp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
+              <small id="pswdhelp" class="form-text text-muted">
                   <ul>
                       <li>At least 1 Uppercase</li>
                       <li>At least 1 Lowercase</li>
@@ -68,7 +70,7 @@
             
              <div class="form-group">
               <label for="confirmpassword">Confirm Password : </label>
-              <input type="password" class="form-control" name="confimpassword" id="confirmpassword" placeholder="Repeat the Password" required>
+              <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Repeat the Password" required>
             </div>
               
             
@@ -92,8 +94,9 @@
               <textarea class="form-control" col="50" row="4" id="address" name="address" required ></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg btn-block " id="btnregister" name="register" onClick="">Register</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block " id="btnregister" name="register">Register</button>
           </form>
+          <p id="test"></p>
         
 
         
@@ -103,20 +106,22 @@
 
 </form>
 
-<script >
-    var password = document.getElementById("password");
+  <script type="text/javascript">
+    var pswd = document.getElementById("pswd");
     var confirmpassword = document.getElementById("confirmpassword");
+    var test = document.getElementById("test");
 
 function validatePassword(){
-  if(password.value != confirmpassword.value) {
+  if(pswd.value != confirmpassword.value) {
     confirmpassword.setCustomValidity("Passwords Don't Match");
   } else {
     confirmpassword.setCustomValidity('');
   }
 }
 
-password.onchange = validatePassword();
-confirmpassword.onkeyup = validatePassword();
+pswd.onchange = validatePassword;
+confirmpassword.onkeyup = validatePassword;
+
 
 </script>
 
