@@ -58,7 +58,7 @@
               <br>
               <div class="col-md-offset-3  col-sm-6">
                 <p><p>
-                <button class="btn btn-primary btn-lg btn-block" id="btnsign" type="submit" name="login" >Sign In</button>
+                <button class="btn btn-primary btn-lg btn-block" id="btnsign" type="submit" name="login" >Login</button>
               </div>    
             </div>
           </form>
