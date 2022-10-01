@@ -129,7 +129,7 @@ if (isset($_POST['id'])) {
             <?php } ?>
 
         </form>
-        <a href="post.php">Back</a>
+        <a href="<?php echo $_SERVER['HTTP_REFERER'] ?>">Back</a>
     </center>
 
 </body>

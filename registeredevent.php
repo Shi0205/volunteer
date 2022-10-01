@@ -117,7 +117,7 @@ $conn = null;
 
                     <td>
                         <a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a>
-                        <a href="registeredevent.php?deleteid=<?php echo $readrow['id'] ?>" class="btn btn-danger btn-xs" role="button">Unregister</a>
+                        <a href="registeredevent.php?deleteid=<?php echo $readrow['id'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?');" role="button">Unregister</a>
                     </td>
                 </tr>
             <?php }
