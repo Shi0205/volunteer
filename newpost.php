@@ -44,9 +44,7 @@
     <div class="container-fluid">
         <div class="row">
             <div id="inside-row" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-                <div class="page-header">
-                    <h2>Post new event</h2>
-                </div>
+               
                 <?php if (isset($failed) && ($failed === true)) {
                     echo '<div id="errorlogin" class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
