@@ -58,6 +58,9 @@ $conn = null;
         }
     }
     ?>
+    <center>
+        <h2>Volunteer Needed</h2>
+    </center>
 
     <table id="datatable" class="table table-striped table-bordered">
         <thead>
@@ -73,17 +76,19 @@ $conn = null;
         </thead>
         <tbody>
             <?php
-            foreach ($result as $readrow) { ?>
-                <tr>
-                    <!-- <td><?php echo $readrow['id'] ?></td> -->
-                    <td><?php echo $readrow['posttime'] ?></td>
-                    <td><?php echo $readrow['title'] ?></td>
-                    <!-- <td><?php echo $readrow['description'] ?></td> -->
-                    <td><?php echo $readrow['location'] ?></td>
-                    <td><?php echo $readrow['noofvolunteer'] ?></td>
-                    <td><a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a></td>
-                </tr>
+            foreach ($result as $readrow) {
+                if ($readrow['noofvolunteer'] > 0) { ?>
+                    <tr>
+                        <!-- <td><?php echo $readrow['id'] ?></td> -->
+                        <td><?php echo $readrow['posttime'] ?></td>
+                        <td><?php echo $readrow['title'] ?></td>
+                        <!-- <td><?php echo $readrow['description'] ?></td> -->
+                        <td><?php echo $readrow['location'] ?></td>
+                        <td><?php echo $readrow['noofvolunteer'] ?></td>
+                        <td><a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a></td>
+                    </tr>
             <?php }
+            }
             ?>
         </tbody>
     </table>
