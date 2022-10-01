@@ -40,7 +40,7 @@ if(isset($_SESSION['login'])){
             $stmt2->bindParam(":uid", $aid, PDO::PARAM_STR);
             $stmt2->bindParam(":email", $email, PDO::PARAM_STR);
             $stmt2->bindParam(":pswd", $pswd, PDO::PARAM_STR);
-            $stmt2->bindParam("role", $role, PDO::PARAM_STR);
+            $stmt2->bindParam(":role", $role, PDO::PARAM_STR);
 
             $role = "admin";
             $stmt2->execute();
