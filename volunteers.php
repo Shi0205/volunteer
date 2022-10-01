@@ -1,4 +1,5 @@
 <?php
+
 include_once 'volunteers_crud.php';
 include_once 'nav_bar.php';
 
@@ -6,7 +7,7 @@ include_once 'nav_bar.php';
 
 <?php
 
-if (!isset($_SESSION["login"])) {
+if (!isset($_SESSION["id"])) {
     header("Location: login.php");
 }
 
@@ -67,12 +68,12 @@ if (!isset($_SESSION["login"])) {
                         </div>
                     </div>
 
-                     <div class="form-group">
-                            <label for="passwordd" class="col-sm-3  control-label">Password : </label>
-                            <div class="col-sm-9">
-                                <input type="password" name="passwordd" id="passwordd" class="form-control" id="pswd" placeholder="Password" required> 
-                            </div>
-                     </div>
+                    <div class="form-group">
+                        <label for="pswd" class="col-sm-3  control-label">Password : </label>
+                        <div class="col-sm-9">
+                            <input type="password" name="pswd" class="form-control" id="pswd" placeholder="Password" required>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-sm-3  control-label">Gender : </label>
@@ -147,19 +148,21 @@ if (!isset($_SESSION["login"])) {
                         } catch (PDOException $e) {
                             echo "Error: " . $e->getMessage();
                         }
+                        foreach ($result as $readrow) {
                         ?>
-                        <tr>
-                            <td><?php echo $readrow['fld_volunteer_id']; ?></td>
-                            <td><?php echo $readrow['fld_volunteer_fname']; ?></td>
-                            <td><?php echo $readrow['fld_volunteer_lname']; ?></td>
-                            <td><?php echo $readrow['fld_volunteer_email']; ?></td>
-                            <td><?php echo $readrow['fld_volunteer_gender']; ?></td>
-                            <td><?php echo $readrow['fld_volunteer_phone']; ?></td>
-                            <td><?php echo $readrow['fld_volunteer_address']; ?></td>
-                            <td>
-                                <a href="volunteers.php?delete=<?php echo $readrow['fld_volunteers_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td><?php echo $readrow['fld_volunteer_id']; ?></td>
+                                <td><?php echo $readrow['fld_volunteer_fname']; ?></td>
+                                <td><?php echo $readrow['fld_volunteer_lname']; ?></td>
+                                <td><?php echo $readrow['fld_volunteer_email']; ?></td>
+                                <td><?php echo $readrow['fld_volunteer_gender']; ?></td>
+                                <td><?php echo $readrow['fld_volunteer_phone']; ?></td>
+                                <td><?php echo $readrow['fld_volunteer_address']; ?></td>
+                                <td>
+                                    <a href="volunteers.php?delete=<?php echo $readrow['fld_volunteer_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+                                </td>
+                            </tr>
+                        <?php  } ?>
                     </tbody>
 
                 </table>
