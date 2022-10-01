@@ -93,7 +93,6 @@ $conn = null;
         }
     }
     ?>
-    ?>
     <center>
         <h2>Registered event</h2>
     </center>
