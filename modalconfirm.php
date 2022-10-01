@@ -67,6 +67,9 @@ if (isset($_POST['id'])) {
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
+
+    <!-- Datatable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap.min.css">
 </head>
 
 <body>
@@ -115,6 +118,11 @@ if (isset($_POST['id'])) {
             $stmt->bindParam(':volunteerid', $volunteerid, PDO::PARAM_STR);
             $stmt->execute();
             $result2 = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $stmt = $conn->prepare("SELECT noofvolunteer FROM post WHERE id=:id");
+            $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+            $stmt->execute();
+            $result4 = $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -122,16 +130,90 @@ if (isset($_POST['id'])) {
         $conn = null;
 
         ?>
-        <form action="modalconfirm.php" method="post">
-            <?php if ($result2 == null) { ?>
-                <button name="id" value="<?php echo $result['id'] ?>">Register</button>
-            <?php } else { ?>
-                <button disabled name="id" value="<?php echo $result['id'] ?>">Registered</button>
-            <?php } ?>
+        <form <?php if ($_SESSION['admin'] == true) {
+                    echo "style='display:none'";
+                } ?> action="modalconfirm.php" method="post">
+            <?php
+            /*
+            if ($result4['noofvolunteer'] == 0) { ?>
+                <button disabled name="id" value="<?php echo $result['id'] ?>">Full</button>
+                <?php } else {
+                if ($result2 == null) { ?>
+                    <button name="id" value="<?php echo $result['id'] ?>">Register</button>
+                <?php } else { ?>
+                    <button disabled name="id" value="<?php echo $result['id'] ?>">Registered</button>
+            <?php }
+            } 
+            */
+            ?>
+            <?php
+            if ($result4['noofvolunteer'] != 0) {
+                if ($result2 == null) { ?>
+                    <button name="id" value="<?php echo $result['id'] ?>">Register</button>
+                <?php } else { ?>
+                    <button disabled name="id" value="<?php echo $result['id'] ?>">Registered</button>
+                <?php }
+            } else {
+                if ($result2 == null) { ?>
+                    <button disabled name="id" value="<?php echo $result['id'] ?>">Full</button>
+                <?php } else { ?>
+                    <button disabled name="id" value="<?php echo $result['id'] ?>">Registered</button>
+            <?php }
+            }  ?>
 
         </form>
-        <a href="<?php echo $_SERVER['HTTP_REFERER'] ?>">Back</a>
+
+
     </center>
+    <?php
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $conn->prepare("SELECT * FROM tbl_volunteers WHERE fld_volunteer_id IN (SELECT fld_volunteer_id FROM tbl_post_volunteer WHERE id=:id)");
+        $stmt->bindParam(":id", $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $result3 = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+
+    $conn = null;
+    ?>
+    <div <?php if ($_SESSION['admin'] == false) {
+                echo "style='display:none'";
+            } ?> class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+        <h2>Registered Volunteer</h2>
+
+        <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Volunteer ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($result3 as $readrow) { ?>
+                    <tr>
+                        <td><?php echo $readrow['fld_volunteer_id'] ?></td>
+                        <td><?php echo $readrow['fld_volunteer_fname'] . " " . $readrow['fld_volunteer_lname'] ?></td>
+                        <td><?php echo $readrow['fld_volunteer_email'] ?></td>
+                        <td><?php echo $readrow['fld_volunteer_phone'] ?></td>
+                        <td><?php echo $readrow['fld_volunteer_gender'] ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </tbody>
+        </table>
+        <center><a href="<?php echo $_SERVER['HTTP_REFERER'] ?>">Back</a></center>
+    </div>
+
 
 </body>
 
@@ -141,3 +223,25 @@ if (isset($_POST['id'])) {
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+<!-- Datatable plug in -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            "lengthMenu": [
+                [5, 10, 20, 30, -1],
+                [5, 10, 20, 30, "All"]
+            ]
+        });
+    });
+</script>

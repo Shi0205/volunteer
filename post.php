@@ -66,10 +66,12 @@ $conn = null;
                 </center>
             </div>
 
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style="padding-bottom:20px;">
+            <div <?php if ($_SESSION['admin'] == false) {
+                        echo "style='display:none'";
+                    } ?> class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style="padding-bottom:20px;">
                 <!-- Button trigger modal -->
-                
-                <button type="button" class="btn btn-success openBtn pull-left" >Add New Post</button>
+
+                <button type="button" class="btn btn-success openBtn pull-left">Add New Post</button>
             </div>
 
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
@@ -106,23 +108,65 @@ $conn = null;
                 </table>
             </div>
         </div> <!-- container fluid -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="padding-bottom: 10px;">
+                <center>
+                    <h2>Volunteer Fulfilled</h2>
+                </center>
+            </div>
+
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+
+                <table id="datatable2" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <!-- <th>Post ID</th> -->
+                            <th>Post DateTime</th>
+                            <th>Title</th>
+                            <!-- <th>Description</th> -->
+                            <th>Location</th>
+                            <th>Volunteer Needed</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($result as $readrow) {
+                            if ($readrow['noofvolunteer'] == 0) { ?>
+                                <tr>
+                                    <!-- <td><?php echo $readrow['id'] ?></td> -->
+                                    <td><?php echo $readrow['posttime'] ?></td>
+                                    <td><?php echo $readrow['title'] ?></td>
+                                    <!-- <td><?php echo $readrow['description'] ?></td> -->
+                                    <td><?php echo $readrow['location'] ?></td>
+                                    <td><?php echo $readrow['noofvolunteer'] ?></td>
+                                    <td><a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a></td>
+                                </tr>
+                        <?php }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- container fluid 
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="newpostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header " >
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" id="exampleModalLabel">Add New Post</h3>
-                    
-                </div>
-                <div class="modal-body">
+        <div class="modal fade" id="newpostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header ">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" id="exampleModalLabel">Add New Post</h3>
 
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
@@ -151,6 +195,14 @@ $conn = null;
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({
+            "lengthMenu": [
+                [5, 10, 20, 30, -1],
+                [5, 10, 20, 30, "All"]
+            ]
+        });
+    });
+    $(document).ready(function() {
+        $('#datatable2').DataTable({
             "lengthMenu": [
                 [5, 10, 20, 30, -1],
                 [5, 10, 20, 30, "All"]
