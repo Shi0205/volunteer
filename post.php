@@ -68,8 +68,8 @@ $conn = null;
 
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style="padding-bottom:20px;">
                 <!-- Button trigger modal -->
-                <a href="newpost.php" data-target="#newpostModal" data-toggle="modal" role="button" class="btn btn-primary pull-left">Add New Post</a>
-                <button type="button" class="btn btn-success openBtn">Open Modal</button>
+                
+                <button type="button" class="btn btn-success openBtn pull-left" >Add New Post</button>
             </div>
 
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
@@ -112,9 +112,10 @@ $conn = null;
     <div class="modal fade" id="newpostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <div class="modal-header " >
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="exampleModalLabel">Add New Post</h3>
+                    
                 </div>
                 <div class="modal-body">
 
