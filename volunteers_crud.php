@@ -62,7 +62,7 @@ if (isset($_SESSION['login'])) {
                 $stmt1->execute();
 
                 $stmt2 = $conn->prepare("DELETE FROM tbl_users WHERE fld_user_id = :uid");
-                $stmt1->bindParam(':uid', $vid, PDO::PARAM_STR);
+                $stmt2->bindParam(':uid', $vid, PDO::PARAM_STR);
 
                 $stmt2->execute();
 
