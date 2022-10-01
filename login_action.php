@@ -10,6 +10,7 @@ if(isset($_POST['login'])){
 
     if(empty($email) || empty($pswd)){
         $_SESSION['error'] = "Please fill the blanks";
+        echo "blank1";
        
     }else{
        try {
@@ -25,10 +26,15 @@ if(isset($_POST['login'])){
         if (isset($result['fld_user_email'])) {
             if($result['fld_user_password']== $pswd){
                 $_SESSION['login'] = true;
-                $_SESSION['level'] = $result['fld_user_role'];
+                
+                if($result['fld_user_role'] == "admin"){
+                     $_SESSION['admin'] = true;
+                }else{
+                    $_SESSION['admin'] = false;
+                }
                
                 
-                if($_SESSION['level'] == "volunteer"){
+                if($_SESSION['admin'] == false){
                     $stmt2 = $conn->prepare("SELECT * FROM tbl_volunteers where fld_volunteer_email=:email LIMIT 1");
                     $stmt2->bindParam('email', $email, PDO::PARAM_STR);
                     $stmt2->execute();
@@ -36,7 +42,7 @@ if(isset($_POST['login'])){
                     $_SESSION['name']=$result2['fname']. ' '. $result2['lname'];
                 }
                 
-                if($_SESSION['level'] == "admin"){
+                if($_SESSION['admin'] == true){
                     $stmt2 = $conn->prepare("SELECT * FROM tbl_admins where fld_admin_email=:email LIMIT 1");
                     $stmt2->bindParam('email', $email, PDO::PARAM_STR);
                     $stmt2->execute();
