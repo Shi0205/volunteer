@@ -69,9 +69,9 @@ if (!isset($_SESSION["id"])) {
                     </div>
 
                     <div class="form-group">
-                        <label for="pswd" class="col-sm-3  control-label">Password : </label>
+                        <label for="passwordd" class="col-sm-3  control-label">Password : </label>
                         <div class="col-sm-9">
-                            <input type="password" name="pswd" class="form-control" id="pswd" placeholder="Password" required>
+                            <input type="password" name="passwordd" class="form-control" id="passwordd" placeholder="Password" required>
                         </div>
                     </div>
 
