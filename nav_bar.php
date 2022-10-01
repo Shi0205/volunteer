@@ -12,7 +12,7 @@
 
       <a class="navbar-brand" href="index.php" style="">
        <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" width="25" height="25" style="float: left; margin-bottom: 50px;"> 
-         <div style="display: inline-block; margin-left: 10px;">Name
+         <div style="display: inline-block; margin-left: 10px;">Star Tech
          </div></a>
     </div>
 
@@ -22,23 +22,25 @@
         <li><a href="index.php">Home</a></li>
         <?php 
         if (isset($_SESSION['level'])) {
-          echo "<li><a href='' style='pointer-events:none;'> Hi, ".$_SESSION['name'].". Have a nice day!</a></li>";
+          echo "<li><a href='' style='pointer-events:none;'> Hi, ".$_SESSION['name'].$_SESSION['level']." Have a nice day!</a></li>";
         }
          ?>
       </ul>
+      
       <ul class="nav navbar-nav navbar-right"  style="<?php if(! isset($_SESSION['level'])) echo 'display: none;' ?>" >
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li ><a href="products.php">Products</a></li>
-            <li ><a href="customers.php">Customers</a></li>
-            <li ><a href="staffs.php" style="<?php if(isset($_SESSION['level'])) if($_SESSION['level']=="staff") echo'display: none;'?>">Staffs</a></li>
-            <li ><a href="orders.php">Orders</a></li>
+            <li ><a href="post.php">Post</a></li>
+            <li ><a href="registeredevent.php" style="<?php if(isset($_SESSION['level'])) if(! $_SESSION['level']=="volunteer") echo 'display: none;'?>">Registered Event</a></li>
+            <li ><a href="volunteers.php" style="<?php if(isset($_SESSION['level'])) if(! $_SESSION['level']=="admin") echo 'display: none;'?>">Volunteer</a></li>
+            <li ><a href="admins.php" style="<?php if(isset($_SESSION['level'])) if(! $_SESSION['level']=="admin") echo 'display: none;'?>">Admin</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="logout.php" >Logout</a></li>
           </ul>
         </li>
       </ul>
+      
     </div> <!-- / .navbar-collapse-->
   </div><!-- /.container-fluid -->
 </nav>
