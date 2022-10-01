@@ -1,3 +1,9 @@
 # volunteer
 
-Simple code.
+Simple code. 
+
+Lack :
+- Profile : Volunteer & Admin 
+- Index : design
+- Footer : design
+
