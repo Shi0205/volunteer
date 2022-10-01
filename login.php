@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if (isset($_SESSION['id'])) {
+  header("Location:index.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -44,6 +49,28 @@
           <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" style="width: 40%" class="img-responsive">
         </center>
         <center>
+          <?php
+          if (isset($_GET['failed'])) {
+            if ($_GET['failed'] == "email") {
+              echo '<div id="errorlogin" class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <strong>Error!</strong> Email does not exist</div>';
+            }
+            if ($_GET['failed'] == "password") {
+              echo '<div id="errorlogin" class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <strong>Error!</strong> Incorrect Password</div>';
+            }
+            if ($_GET['failed'] == "doesnotexist") {
+              echo '<div id="errorlogin" class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <strong>Error!</strong> Account Does not exist</div>';
+            }
+          }
+          ?>
           <form action="login_action.php" method="post" class="form-horizontal">
             <div class="form-group">
               <div class="col-sm-8 col-sm-offset-2">

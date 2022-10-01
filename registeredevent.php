@@ -1,6 +1,11 @@
 <?php
 include_once 'database.php';
 session_start();
+if (!isset($_SESSION['admin'])) {
+    header("Location:login.php");
+} else if ($_SESSION['admin'] == true) {
+    header("Location:login.php");
+}
 $volunteerid = $_SESSION['id'];
 
 if (isset($_GET['deleteid'])) {
@@ -74,7 +79,7 @@ $conn = null;
 </head>
 
 <body>
-    
+
     <?php
     include_once 'nav_bar.php';
     if (isset($_GET['success'])) {
@@ -102,7 +107,7 @@ $conn = null;
                 </center>
             </div>
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
-  
+
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -131,33 +136,33 @@ $conn = null;
                         ?>
                     </tbody>
                 </table>
-                
+
             </div>
         </div> <!-- container fluid -->
-    </body>
+</body>
 
-    </html>
+</html>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-    <!-- Datatable plug in -->
+<!-- Datatable plug in -->
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#datatable').DataTable({
-                "lengthMenu": [
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            "lengthMenu": [
                 [5, 10, 20, 30, -1],
                 [5, 10, 20, 30, "All"]
-                ]
-            });
+            ]
         });
-    </script>
+    });
+</script>
