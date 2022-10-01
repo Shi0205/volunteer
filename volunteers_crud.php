@@ -36,8 +36,8 @@ if (isset($_SESSION['login'])) {
             $stmt2 = $conn->prepare("INSERT INTO tbl_users(fld_user_id,fld_user_email, fld_user_password, fld_user_role ) VALUES (:uid,:email, :pswd, :role)");
             $stmt2->bindParam(":uid", $vid, PDO::PARAM_STR);
             $stmt2->bindParam(":email", $email, PDO::PARAM_STR);
-            $stmt2->bindParam(":pswd", $email, PDO::PARAM_STR);
-            $stmt2->bindParam("role", $role, PDO::PARAM_STR);
+            $stmt2->bindParam(":pswd", $pswd, PDO::PARAM_STR);
+            $stmt2->bindParam(":role", $role, PDO::PARAM_STR);
 
             $role = "volunteer";
             $stmt2->execute();
