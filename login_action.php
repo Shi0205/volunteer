@@ -5,7 +5,7 @@ include_once 'database.php';
 
 if(isset($_POST['login'])){
 
-    $email = $_POST['email'];
+    $email = $_POST['emaill'];
     $pswd = $_POST['pswd'];
 
     if(empty($email) || empty($pswd)){
