@@ -126,10 +126,7 @@ if(isset($_SESSION['login'])){
           
         }
         
-    }else{
-        header("Location:volunteers.php");     
-    } // End delete
-    
+    }
     
     // Edit
     if(isset($_GET['edit'])){
