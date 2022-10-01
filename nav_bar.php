@@ -22,7 +22,7 @@
         <li><a href="index.php">Home</a></li>
         <?php 
         if (isset($_SESSION['level'])) {
-          echo "<li><a href='' style='pointer-events:none;'> Hi, ".$_SESSION['username'].". Have a nice day!</a></li>";
+          echo "<li><a href='' style='pointer-events:none;'> Hi, ".$_SESSION['name'].". Have a nice day!</a></li>";
         }
          ?>
       </ul>
