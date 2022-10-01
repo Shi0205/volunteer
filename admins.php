@@ -149,6 +149,7 @@ include_once 'nav_bar.php';
                             }catch(PDOException $e){
                                 echo "Error: ". $e->getMessage();
                             }
+                          foreach ($result as $readrow) {
                             ?>
                             <tr>
                                 <td><?php echo $readrow['fld_admin_id']; ?></td>
@@ -163,6 +164,7 @@ include_once 'nav_bar.php';
                                     <a href="admins.php?delete=<?php echo $readrow['fld_admin_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button" >Delete</a>
                                 </td>
                             </tr>
+                          <?php  } ?>
                         </tbody>
    
                     </table>
