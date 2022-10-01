@@ -1,6 +1,7 @@
 <?php
 include_once 'database.php';
-$volunteerid = "tes1t";
+session_start();
+$volunteerid = $_SESSION['id'];
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     try {
@@ -123,7 +124,7 @@ if (isset($_POST['id'])) {
         ?>
         <form action="modalconfirm.php" method="post">
             <?php if ($result2 == null) { ?>
-                <button name="id" value="<?php echo $result['id'] ?>">Submit</button>
+                <button name="id" value="<?php echo $result['id'] ?>">Register</button>
             <?php } else { ?>
                 <button disabled name="id" value="<?php echo $result['id'] ?>">Registered</button>
             <?php } ?>

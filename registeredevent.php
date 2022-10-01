@@ -1,7 +1,7 @@
 <?php
 include_once 'database.php';
-
-$volunteerid = "tes1t";
+session_start();
+$volunteerid = $_SESSION['id'];
 
 if (isset($_GET['deleteid'])) {
     try {

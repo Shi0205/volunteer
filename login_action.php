@@ -77,5 +77,3 @@ if(isset($_POST['login'])){
    echo "Error: You have execute a wrong PHP. Please contact the web adminstrator.";
    die();
 }
-
-?>
