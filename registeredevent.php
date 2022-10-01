@@ -74,14 +74,15 @@ $conn = null;
 </head>
 
 <body>
+    
     <?php
     include_once 'nav_bar.php';
     if (isset($_GET['success'])) {
         if ($_GET['success'] == "true") {
             echo '<div id="errorlogin" class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                    <strong>Success!</strong> You have successfully unregistered the event</div>';
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <strong>Success!</strong> You have successfully unregistered the event</div>';
         }
     }
     if (isset($_GET['success'])) {
@@ -93,61 +94,70 @@ $conn = null;
         }
     }
     ?>
-    <center>
-        <h2>Registered event</h2>
-    </center>
-    <table id="datatable" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Post ID</th>
-                <th>Title</th>
-                <!-- <th>Description</th> -->
-                <th>Location</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($result as $readrow) { ?>
-                <tr>
-                    <td><?php echo $readrow['id'] ?></td>
-                    <td><?php echo $readrow['title'] ?></td>
-                    <!-- <td><?php echo $readrow['description'] ?></td> -->
-                    <td><?php echo $readrow['location'] ?></td>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="padding-bottom: 20px;">
+                <center>
+                    <h2>Registered event</h2>
+                </center>
+            </div>
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+  
+                <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Post ID</th>
+                            <th>Title</th>
+                            <!-- <th>Description</th> -->
+                            <th>Location</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($result as $readrow) { ?>
+                            <tr>
+                                <td><?php echo $readrow['id'] ?></td>
+                                <td><?php echo $readrow['title'] ?></td>
+                                <!-- <td><?php echo $readrow['description'] ?></td> -->
+                                <td><?php echo $readrow['location'] ?></td>
 
-                    <td>
-                        <a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a>
-                        <a href="registeredevent.php?deleteid=<?php echo $readrow['id'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?');" role="button">Unregister</a>
-                    </td>
-                </tr>
-            <?php }
-            ?>
-        </tbody>
-    </table>
-</body>
+                                <td>
+                                    <a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a>
+                                    <a href="registeredevent.php?deleteid=<?php echo $readrow['id'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?');" role="button">Unregister</a>
+                                </td>
+                            </tr>
+                        <?php }
+                        ?>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div> <!-- container fluid -->
+    </body>
 
-</html>
+    </html>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-<!-- Datatable plug in -->
+    <!-- Datatable plug in -->
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#datatable').DataTable({
-            "lengthMenu": [
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                "lengthMenu": [
                 [5, 10, 20, 30, -1],
                 [5, 10, 20, 30, "All"]
-            ]
+                ]
+            });
         });
-    });
-</script>
+    </script>
