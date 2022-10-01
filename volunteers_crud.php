@@ -1,15 +1,15 @@
-<?php 
+<?php
 include_once 'database.php';
 session_start();
 
-if(isset($_SESSION['login'])){
-    
+if (isset($_SESSION['login'])) {
+
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
+
     // Create
     if (isset($_POST['create'])) {
-        try { 
+        try {
             $conn->beginTransaction();
 
             $stmt1 = $conn->prepare("INSERT INTO tbl_volunteers(fld_volunteer_id, fld_volunteer_fname, fld_volunteer_lname, fld_volunteer_email, fld_volunteer_gender, fld_volunteer_phone, fld_volunteer_address) VALUES (:vid, :fname, :lname, :email, :gender, :phone, :address)");
@@ -44,52 +44,42 @@ if(isset($_SESSION['login'])){
             $stmt2->execute();
 
             $conn->commit();
-
         } catch (PDOException $e) {
             $conn->rollback();
             echo "Error: " . $e->getMessage();
-            
         }
     } // NOTE: End create
-    
+
     // Delete
     if (isset($_GET['delete'])) {
-        if($_SESSION['admin'] == true){
+        if ($_SESSION['admin'] == true) {
             try {
                 $conn->beginTransaction();
-                
+
                 $stmt1 = $conn->prepare("DELETE FROM tbl_volunteers WHERE fld_volunteer_id = :vid");
                 $stmt1->bindParam(':vid', $vid, PDO::PARAM_STR);
-                
+
                 $vid = $_GET['delete'];
                 $stmt1->execute();
-                
+
                 $stmt2 = $conn->prepare("DELETE FROM tbl_users WHERE fld_user_id = :uid");
-                $stmt1->bindParam(':uid', vid, PDO::PARAM_STR);
-                
+                $stmt1->bindParam(':uid', $vid, PDO::PARAM_STR);
+
                 $stmt2->execute();
-                
+
                 $conn->commit();
-                
+
                 header("Location: volunteers.php");
-                
             } catch (PDOException $e) {
                 $conn->rollback();
-                echo "Error: ".$e->getMessage();
-            } 
-            
-          
+                echo "Error: " . $e->getMessage();
+            }
         }
-        
-    }else{
-        header("Location:volunteers.php");     
+    } else {
+        header("Location:volunteers.php");
     } // End delete
-    
-    $conn = null;  
-}else{
+
+    $conn = null;
+} else {
     header("Location: login.php");
 }
-
-
-
-?>
