@@ -40,7 +40,7 @@ include_once 'nav_bar.php';
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" >
                     
                     <div class="page-header">
-                        <h2>Add New Volunteers</h2>
+                        <h2>Add New Volunteer</h2>
                     </div>
                     
                     <form action="volunteers.php" method="post" class="form-horizontal">
