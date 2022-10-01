@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff</title>
+    <title>NewPost</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -26,7 +26,6 @@
 </head>
 
 <body>
-    <?php include_once 'nav_bar.php' ?>
     <!-- <form action="staffcrud.php" method="post">
         <label for="title">Title</label>
         <input type="text" name="title" id="title">
@@ -34,7 +33,6 @@
         <label for="description">Description</label><br>
         <textarea name="description" id="description" cols="30" rows="10"></textarea>
         <br>
-
         <label for="location">Location</label>
         <input type="text" name="location" id="location">
         <br>
@@ -45,7 +43,7 @@
     </form> -->
     <div class="container-fluid">
         <div class="row">
-            <div id="inside-row" class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div id="inside-row" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
                 <div class="page-header">
                     <h2>Post new event</h2>
                 </div>
@@ -55,7 +53,7 @@
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                         <strong>Error!</strong> Please enter a correct username and password. Note that both fields may be case sensitive.</div>';
                 } ?>
-                <form action="staffcrud.php" method="post" class="form-horizontal">
+                <form action="staffcrud.php" method="post" class="form-horizontal" style="margin-bottom: 20px;">
                     <div class="form-group">
                         <label for="title" class="col-sm-3 control-label">Title</label>
                         <div class="col-sm-9">
@@ -82,7 +80,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <button class="btn btn-default" type="submit" name="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Post</button>
+                            <button class="btn btn-default pull-right" type="submit" name="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Post</button>
+                            
                         </div>
                     </div>
 
