@@ -1,81 +1,77 @@
-<?php 
-session_start();
-include_once 'database.php';
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Star Tech : Login </title>
+ 
+  <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+   <!-- Optional theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-if(isset($_POST['login'])){
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+ <style type="text/css">
+   #btnsign {
+    border-radius: 12px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+   }
 
-    $email = $_POST['emaill'];
-    $pswd = $_POST['pswd'];
+   #emaill, #pswd {
+    border-radius:  30px;
+    text-align: center;
+    font-size: 15px;
+   }
+ </style>
+  </head>
 
-    if(empty($email) || empty($pswd)){
-        $_SESSION['error'] = "Please fill the blanks";
-        echo "blank1";
-       
-    }else{
-       try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt1 = $conn->prepare("SELECT * FROM tbl_users WHERE fld_user_email=:email LIMIT 1");
+  <body class="img js-fullheight"  >
+      
+    <?php include_once 'nav_bar.php'; ?>
+   
+    <div class="container-fluid" >
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3  text-center">
+          <center> 
+            <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png" style="width: 40%" class="img-responsive">
+          </center>
+          <center>
+            <form action="login_action.php" method="post" class="form-horizontal">
+            <div class="form-group">
+              <div class="col-sm-8 col-sm-offset-2">
+                <input type="email" name="emaill" class="form-control" id="emaill" placeholder="Enter the Email"  required> 
+              </div>
+            </div>
 
-        $stmt1->bindParam(':email', $email, PDO::PARAM_STR);
-        
-        $stmt1->execute();
-        $result = $stmt1->fetch(PDO::FETCH_ASSOC);
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-2">
+                  <input type="password" name="pswd" class="form-control" id="pswd" placeholder="Enter the Password" required> 
+              </div>
+            </div>
 
-        if (isset($result['fld_user_email'])) {
-            if($result['fld_user_password']== $pswd){
-                $_SESSION['login'] = true;
-                $_SESSION['id'] = $result['fld_user_id'];
-                
-                if($result['fld_user_role'] == "admin"){
-                     $_SESSION['admin'] = true;
-                }else{
-                    $_SESSION['admin'] = false;
-                }
-               
-                
-                if($_SESSION['admin'] == false){
-                    $stmt2 = $conn->prepare("SELECT * FROM tbl_volunteers where fld_volunteer_email=:email LIMIT 1");
-                    $stmt2->bindParam('email', $email, PDO::PARAM_STR);
-                    $stmt2->execute();
-                    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-                    $_SESSION['name']=$result2['fname']. ' '. $result2['lname'];
-                }
-                
-                if($_SESSION['admin'] == true){
-                    $stmt2 = $conn->prepare("SELECT * FROM tbl_admins where fld_admin_email=:email LIMIT 1");
-                    $stmt2->bindParam('email', $email, PDO::PARAM_STR);
-                    $stmt2->execute();
-                    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-                    $_SESSION['name']=$result2['fname']. ' '. $result2['lname'];
-                }
-                
-               
-                header("Location:index.php");
-                exit();
-                
-            }else{
-                $_SESSION['errorM'] = "Invalid password. Please try again.";
-            }
-        }else{
-            $_SESSION['errorM'] = "Invalid username. Please try again.";
-        }
+            <div class="form-group">
+              <br>
+              <div class="col-md-offset-3  col-sm-6 col-sm-offset-3">
+                <p><p>
+                <button class="btn btn-primary btn-lg btn-block" id="btnsign" type="submit" name="login" style="center">Login</button>
+              </div>    
+            </div>
+          </form>
+          </center>
 
-        header("Location: login.php");
-        exit();
-
-    }catch (PDOException $e) {
-     $_SESSION['errorM'] = "problem";
-    }
- $conn = null;
-}
-
-
-
-}else{
-   echo "Error: You have execute a wrong PHP. Please contact the web adminstrator.";
-   die();
-}
-
-?>
+          
+        </div> <!-- class-->      
+      </div> <!-- row 1 -->
+    </div> <!-- container -->
+    
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+  </html>
