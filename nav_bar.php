@@ -21,20 +21,20 @@
       <ul class="nav navbar-nav">
         <li><a href="index.php">Home</a></li>
         <?php 
-        if (isset($_SESSION['level'])) {
-          echo "<li><a href='' style='pointer-events:none;'> Hi, ".$_SESSION['name'].$_SESSION['level']." Have a nice day!</a></li>";
+        if (isset($_SESSION['admin'])) {
+          echo "<li><a href='' style='pointer-events:none;'> Hi, ".$_SESSION['name']." Have a nice day!</a></li>";
         }
          ?>
       </ul>
       
-      <ul class="nav navbar-nav navbar-right"  style="<?php if(! isset($_SESSION['level'])) echo 'display: none;' ?>" >
+      <ul class="nav navbar-nav navbar-right"  style="<?php if(! isset($_SESSION['admin'])) echo 'display: none;' ?>" >
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li ><a href="post.php">Post</a></li>
-            <li ><a href="registeredevent.php" style="<?php if(isset($_SESSION['level'])) if(! $_SESSION['level']=="volunteer") echo 'display: none;'?>">Registered Event</a></li>
-            <li ><a href="volunteers.php" style="<?php if(isset($_SESSION['level'])) if(! $_SESSION['level']=="admin") echo 'display: none;'?>">Volunteer</a></li>
-            <li ><a href="admins.php" style="<?php if(isset($_SESSION['level'])) if(! $_SESSION['level']=="admin") echo 'display: none;'?>">Admin</a></li>
+            <li ><a href="registeredevent.php" style="<?php if(isset($_SESSION['admin']) && ( $_SESSION['admin']== true)) echo 'display: none;'?>">Registered Event</a></li>
+            <li ><a href="volunteers.php" style="<?php if(isset($_SESSION['admin'])) if(! $_SESSION['admin']== true) echo 'display: none;'?>">Volunteer</a></li>
+            <li ><a href="admins.php" style="<?php if(isset($_SESSION['admin'])) if(! $_SESSION['admin']==true) echo 'display: none;'?>">Admin</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="logout.php" >Logout</a></li>
           </ul>
