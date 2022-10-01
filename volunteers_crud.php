@@ -75,8 +75,6 @@ if (isset($_SESSION['login'])) {
                 echo "Error: " . $e->getMessage();
             }
         }
-    } else {
-        header("Location:volunteers.php");
     } // End delete
 
     $conn = null;
