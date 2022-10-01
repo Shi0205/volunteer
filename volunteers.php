@@ -10,7 +10,11 @@ include_once 'nav_bar.php';
 if (!isset($_SESSION["id"])) {
     header("Location: login.php");
 }
-
+if (isset($_SESSION['admin'])) {
+    if ($_SESSION['admin'] != true) {
+        header("Location:post.php");
+    }
+}
 ?>
 
 <!DOCTYPE html>
