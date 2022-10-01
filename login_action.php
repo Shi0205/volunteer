@@ -40,7 +40,7 @@ if(isset($_POST['login'])){
                     $stmt2->bindParam('email', $email, PDO::PARAM_STR);
                     $stmt2->execute();
                     $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-                    $_SESSION['name']=$result2['fname']. ' '. $result2['lname'];
+                    $_SESSION['name']=$result2['fld_volunteer_fname']. ' '. $result2['fld_volunteer_lname'];
                 }
                 
                 if($_SESSION['admin'] == true){
@@ -48,7 +48,7 @@ if(isset($_POST['login'])){
                     $stmt2->bindParam('email', $email, PDO::PARAM_STR);
                     $stmt2->execute();
                     $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-                    $_SESSION['name']=$result2['fname']. ' '. $result2['lname'];
+                    $_SESSION['name']=$result2['fld_admin_fname']. ' '. $result2['fld_admin_lname'];
                 }
                 
                
