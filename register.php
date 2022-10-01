@@ -43,7 +43,7 @@
                  <label for="fname">First Name: </label>
                  <input type="fname" class="form-control" name="fname" id="fname" placeholder="First Name" required>
                </div>
-               <div class="form-group col-md-6" >
+               <div class="form-group col-md-6"  style="padding-left: 0px;" >
                    <label for="lname">Last Name: </label>
                    <input type="lname" class="form-control" name="lname" id="lname" placeholder="Last Name" required >
                </div>
