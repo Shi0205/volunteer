@@ -2,6 +2,41 @@
 include_once 'database.php';
 
 $volunteerid = "tes1t";
+
+if (isset($_GET['deleteid'])) {
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $conn->beginTransaction();
+
+        $stmt = $conn->prepare("DELETE FROM tbl_post_volunteer WHERE fld_volunteer_id=:volunteerid AND id=:id");
+        $stmt->bindParam(":volunteerid", $volunteerid, PDO::PARAM_STR);
+        $stmt->bindParam(":id", $id, PDO::PARAM_STR);
+
+        $id = $_GET['deleteid'];
+
+        $stmt->execute();
+
+        $stmt2 = $conn->prepare("UPDATE post SET noofvolunteer=noofvolunteer+1 WHERE id=:id");
+        $stmt2->bindParam(":id", $id);
+
+        $stmt2->execute();
+
+        $conn->commit();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        header("Location:registeredevent.php?success=true");
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        $conn->rollBack();
+        header("Location:registeredevent.php?success=false&msg=" . $e->getMessage());
+    }
+
+    $conn = null;
+}
+
+
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -41,7 +76,23 @@ $conn = null;
 <body>
     <?php
     include_once 'nav_bar.php';
-
+    if (isset($_GET['success'])) {
+        if ($_GET['success'] == "true") {
+            echo '<div id="errorlogin" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    <strong>Success!</strong> You have successfully unregistered the event</div>';
+        }
+    }
+    if (isset($_GET['success'])) {
+        if ($_GET['success'] == "false") {
+            echo '<div id="errorlogin" class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <strong>Error!</strong>' . $_GET['msg'] . ' </div>';
+        }
+    }
+    ?>
     ?>
     <center>
         <h2>Registered event</h2>
@@ -65,7 +116,10 @@ $conn = null;
                     <!-- <td><?php echo $readrow['description'] ?></td> -->
                     <td><?php echo $readrow['location'] ?></td>
 
-                    <td><a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a></td>
+                    <td>
+                        <a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a>
+                        <a href="registeredevent.php?deleteid=<?php echo $readrow['id'] ?>" class="btn btn-danger btn-xs" role="button">Unregister</a>
+                    </td>
                 </tr>
             <?php }
             ?>
