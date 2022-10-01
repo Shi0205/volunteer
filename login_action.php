@@ -26,6 +26,7 @@ if(isset($_POST['login'])){
         if (isset($result['fld_user_email'])) {
             if($result['fld_user_password']== $pswd){
                 $_SESSION['login'] = true;
+                $_SESSION['id'] = $result['fld_user_id'];
                 
                 if($result['fld_user_role'] == "admin"){
                      $_SESSION['admin'] = true;
