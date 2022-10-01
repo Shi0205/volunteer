@@ -1,9 +1,6 @@
 <?php
 include_once 'database.php';
 session_start();
-if (!isset($_SESSION['login'])) {
-    header("Location:login.php");
-}
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -63,12 +60,19 @@ $conn = null;
     ?>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="padding-bottom: 20px;">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="padding-bottom: 10px;">
                 <center>
                     <h2>Volunteer Needed</h2>
                 </center>
             </div>
+            
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1" style="padding-bottom:20px;"> 
+                <!-- Button trigger modal -->
+                <a href="newpost.php" data-target="#newpostModal" data-toggle="modal" role="button" class="btn btn-primary pull-left">Add New Post</a>
+            </div>
+            
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -94,13 +98,32 @@ $conn = null;
                                     <td><?php echo $readrow['noofvolunteer'] ?></td>
                                     <td><a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a></td>
                                 </tr>
-                        <?php }
+                            <?php }
                         }
                         ?>
                     </tbody>
                 </table>
             </div>
         </div> <!-- container fluid -->
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="newpostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
 
 
 </body>
@@ -116,17 +139,20 @@ $conn = null;
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> -->
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#datatable').DataTable({
-            "lengthMenu": [
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                "lengthMenu": [
                 [5, 10, 20, 30, -1],
                 [5, 10, 20, 30, "All"]
-            ]
+                ]
+            });
         });
-    });
-</script>
+    </script>
