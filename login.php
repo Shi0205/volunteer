@@ -22,7 +22,7 @@
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
    }
 
-   #email, #pswd {
+   #emaill, #pswd {
     border-radius:  30px;
     text-align: center;
     font-size: 15px;
@@ -44,7 +44,7 @@
             <form action="login_action.php" method="post" class="form-horizontal">
             <div class="form-group">
               <div class="col-sm-8 col-sm-offset-2">
-                <input type="text" name="email" class="form-control" id="email" placeholder="Enter the Email"  required> 
+                <input type="email" name="emaill" class="form-control" id="emaill" placeholder="Enter the Email"  required> 
               </div>
             </div>
 
