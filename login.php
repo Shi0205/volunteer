@@ -90,6 +90,8 @@ if (isset($_SESSION['id'])) {
                 <p>
                 <p>
                   <button class="btn btn-primary btn-lg btn-block" id="btnsign" type="submit" name="login">Login</button>
+                  <hr>
+                  <P>Haven't register yet ? </P>
                   <a class="btn btn-info btn-lg btn-block" id="btnsign" href="register.php">Register</a>
               </div>
             </div>
