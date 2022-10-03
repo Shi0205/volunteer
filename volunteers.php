@@ -3,6 +3,19 @@
 include_once 'volunteers_crud.php';
 include_once 'nav_bar.php';
 
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $conn->prepare("SELECT * FROM tbl_volunteers");
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+$conn = null;
 ?>
 
 <?php
@@ -25,6 +38,7 @@ if (isset($_SESSION['admin'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Star Tech : Volunteers</title>
+    
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -33,11 +47,12 @@ if (isset($_SESSION['admin'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-
+    <!-- Datatable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap.min.css">
+    
+    
 </head>
 
 <body>
@@ -122,79 +137,71 @@ if (isset($_SESSION['admin'])) {
                     <h2>Volunteer List</h2>
                 </div>
 
-                <table id="vlist" class="table table-striped table-bordered" style="width:100%">
-                    <thread>
-                        <th>Volunteer ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Gender</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th></th>
-                    </thread>
-
+                <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <!-- <th>Post ID</th> -->
+                            <th>Volunteer's ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <!-- <th>Description</th> -->
+                            <th>Gender</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <?php
-                        $per_page = 45;
-                        if (isset($_GET["page"]))
-                            $page = $_GET["page"];
-                        else
-                            $page = 1;
-                        $start_form = ($page - 1) * $per_page;
-
-                        try {
-                            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $stmt = $conn->prepare("SELECT * FROM tbl_volunteers LIMIT $start_form, $per_page");
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
-                        }
-                        foreach ($result as $readrow) {
-                        ?>
+      
+                    foreach ($result as $readrow) {
+                       ?>
                             <tr>
-                                <td><?php echo $readrow['fld_volunteer_id']; ?></td>
-                                <td><?php echo $readrow['fld_volunteer_fname']; ?></td>
-                                <td><?php echo $readrow['fld_volunteer_lname']; ?></td>
-                                <td><?php echo $readrow['fld_volunteer_email']; ?></td>
-                                <td><?php echo $readrow['fld_volunteer_gender']; ?></td>
-                                <td><?php echo $readrow['fld_volunteer_phone']; ?></td>
-                                <td><?php echo $readrow['fld_volunteer_address']; ?></td>
-                                <td>
-                                    <a href="volunteers.php?delete=<?php echo $readrow['fld_volunteer_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
-                                </td>
+                                <td><?php echo $readrow['fld_volunteer_id'] ?></td>
+                                <td><?php echo $readrow['fld_volunteer_fname'] ?></td>
+                                <td><?php echo $readrow['fld_volunteer_lname'] ?></td> 
+                                <td><?php echo $readrow['fld_volunteer_email'] ?></td>
+                                <td><?php echo $readrow['fld_volunteer_gender'] ?></td>
+                                <td><?php echo $readrow['fld_volunteer_phone'] ?></td>
+                                <td><?php echo $readrow['fld_volunteer_address'] ?></td>
+                                <td><a href="volunteers.php?delete=<?php echo $readrow['fld_volunteer_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button" style="<?php if($_SESSION['admin']==false) echo 'display: none;' ?>" >Delete</a></td>
                             </tr>
-                        <?php  } ?>
-                    </tbody>
-
-                </table>
-            </div>
-        </div> <!-- row  -->
-
-
-
-
-    </div> <!-- container-fluid -->
+                        <?php 
+                    }
+                    ?>
+                </tbody>
+            </table>
+            
+        </div>
+    </div> <!-- row  -->
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                lengthMenu: [
-                    [5, 10, 20, 30, -1],
-                    [5, 10, 20, 30, 'All'],
-                ],
-            });
-        });
-    </script>
+</div> <!-- container-fluid -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+
+
+<script>
+   $(document).ready(function() {
+    $('#datatable').DataTable({
+        "lengthMenu": [
+        [5, 10, 20, 30, -1],
+        [5, 10, 20, 30, "All"]
+        ]
+    });
+});
+</script>
 </body>
 
 </html>
