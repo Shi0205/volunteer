@@ -46,6 +46,9 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $currenttime = date('Y-m-d H:i:s');
+
     $stmt = $conn->prepare("SELECT * FROM post WHERE id IN (SELECT id FROM tbl_post_volunteer WHERE fld_volunteer_id=:volunteerid)");
     $stmt->bindParam(":volunteerid", $volunteerid, PDO::PARAM_STR);
     $stmt->execute();
@@ -100,10 +103,11 @@ $conn = null;
     }
     ?>
     <div class="container-fluid">
+        <!-- UPCOMING EVENT -->
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="padding-bottom: 20px;">
                 <center>
-                    <h2>Registered event</h2>
+                    <h2>Registered upcoming event</h2>
                 </center>
             </div>
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
@@ -111,6 +115,7 @@ $conn = null;
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th>Event Date</th>
                             <th>Post ID</th>
                             <th>Title</th>
                             <!-- <th>Description</th> -->
@@ -120,25 +125,73 @@ $conn = null;
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($result as $readrow) { ?>
-                            <tr>
-                                <td><?php echo $readrow['id'] ?></td>
-                                <td><?php echo $readrow['title'] ?></td>
-                                <!-- <td><?php echo $readrow['description'] ?></td> -->
-                                <td><?php echo $readrow['location'] ?></td>
+                        foreach ($result as $readrow) {
+                            if ($readrow['eventdate'] >= $currenttime) { ?>
+                                <tr>
+                                    <td><?php echo $readrow['eventdate'] ?></td>
+                                    <td><?php echo $readrow['id'] ?></td>
+                                    <td><?php echo $readrow['title'] ?></td>
+                                    <!-- <td><?php echo $readrow['description'] ?></td> -->
+                                    <td><?php echo $readrow['location'] ?></td>
 
-                                <td>
-                                    <a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a>
-                                    <a href="registeredevent.php?deleteid=<?php echo $readrow['id'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?');" role="button">Unregister</a>
-                                </td>
-                            </tr>
+                                    <td>
+                                        <a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a>
+                                        <a href="registeredevent.php?deleteid=<?php echo $readrow['id'] ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?');" role="button">Unregister</a>
+                                    </td>
+                                </tr>
                         <?php }
+                        }
                         ?>
                     </tbody>
                 </table>
 
             </div>
-        </div> <!-- container fluid -->
+        </div>
+
+        <!-- PAST EVENT -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="padding-bottom: 20px;">
+                <center>
+                    <h2>Past event</h2>
+                </center>
+            </div>
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+
+                <table id="datatable2" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Event Date</th>
+                            <th>Post ID</th>
+                            <th>Title</th>
+                            <!-- <th>Description</th> -->
+                            <th>Location</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($result as $readrow) {
+                            if ($readrow['eventdate'] < $currenttime) { ?>
+                                <tr>
+                                    <td><?php echo $readrow['eventdate'] ?></td>
+                                    <td><?php echo $readrow['id'] ?></td>
+                                    <td><?php echo $readrow['title'] ?></td>
+                                    <!-- <td><?php echo $readrow['description'] ?></td> -->
+                                    <td><?php echo $readrow['location'] ?></td>
+
+                                    <td>
+                                        <a href="modalconfirm.php?id=<?php echo $readrow['id'] ?>" class="btn btn-warning btn-xs" role="button">Details</a>
+                                    </td>
+                                </tr>
+                        <?php }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div><!-- container fluid -->
 </body>
 
 </html>
@@ -159,6 +212,14 @@ $conn = null;
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({
+            "lengthMenu": [
+                [5, 10, 20, 30, -1],
+                [5, 10, 20, 30, "All"]
+            ]
+        });
+    });
+    $(document).ready(function() {
+        $('#datatable2').DataTable({
             "lengthMenu": [
                 [5, 10, 20, 30, -1],
                 [5, 10, 20, 30, "All"]

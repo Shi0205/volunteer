@@ -98,6 +98,10 @@ if (isset($_POST['id'])) {
                             <td><a href="https://maps.google.com/?q=<?php echo $result['location'] ?>"><?php echo $result['location'] ?></a></td>
                         </tr>
                         <tr>
+                            <td><strong>Event Date</strong></td>
+                            <td><?php echo $result['eventdate'] ?></td>
+                        </tr>
+                        <tr>
                             <td><strong>Description</strong></td>
                             <td><?php echo $result['description'] ?></td>
                         </tr>
@@ -162,7 +166,9 @@ if (isset($_POST['id'])) {
             }  ?>
 
         </form>
-
+        <a <?php if ($_SESSION['admin'] == true) {
+                echo "style='display:none'";
+            } ?> href="<?php echo $_SERVER['HTTP_REFERER'] ?>">Back</a>
 
     </center>
     <?php
