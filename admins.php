@@ -2,6 +2,19 @@
 include_once 'admins_crud.php';
 include_once 'nav_bar.php';
 
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $conn->prepare("SELECT * FROM tbl_admins");
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+$conn = null;
+
 ?>
 
 <?php
@@ -44,7 +57,7 @@ if (isset($_SESSION['admin'])) {
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <div class="col-xs-12 col-sm-9 col-sm-offset-1 col-md-7 col-md-offset-2">
 
                 <div class="page-header">
                     <h2>Add New Admin</h2>
@@ -120,86 +133,80 @@ if (isset($_SESSION['admin'])) {
             </div>
         </div> <!-- row  -->
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+         <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
                 <div class="page-header"><br>
-                    <h2>Admin List</h2>
+                    <h2>Admins List</h2>
                 </div>
 
-                <table id="vlist" class="table table-striped table-bordered" style="width:100%">
-                    <thread>
-                        <th>Admin ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Gender</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th></th>
-                    </thread>
-
+                <table id="datatable" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <!-- <th>Post ID</th> -->
+                            <th>Admin's ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <!-- <th>Description</th> -->
+                            <th>Gender</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <?php
-                        $per_page = 45;
-                        if (isset($_GET["page"]))
-                            $page = $_GET["page"];
-                        else
-                            $page = 1;
-                        $start_form = ($page - 1) * $per_page;
-
-                        try {
-                            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $stmt = $conn->prepare("SELECT * FROM tbl_admins LIMIT $start_form, $per_page");
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
-                        } catch (PDOException $e) {
-                            echo "Error: " . $e->getMessage();
-                        }
-                        foreach ($result as $readrow) {
-                        ?>
+      
+                    foreach ($result as $readrow) {
+                       ?>
                             <tr>
-                                <td><?php echo $readrow['fld_admin_id']; ?></td>
-                                <td><?php echo $readrow['fld_admin_fname']; ?></td>
-                                <td><?php echo $readrow['fld_admin_lname']; ?></td>
-                                <td><?php echo $readrow['fld_admin_email']; ?></td>
-                                <td><?php echo $readrow['fld_admin_gender']; ?></td>
-                                <td><?php echo $readrow['fld_admin_phone']; ?></td>
-                                <td><?php echo $readrow['fld_admin_address']; ?></td>
+                                <td><?php echo $readrow['fld_admin_id'] ?></td>
+                                <td><?php echo $readrow['fld_admin_fname'] ?></td>
+                                <td><?php echo $readrow['fld_admin_lname'] ?></td> 
+                                <td><?php echo $readrow['fld_admin_email'] ?></td>
+                                <td><?php echo $readrow['fld_admin_gender'] ?></td>
+                                <td><?php echo $readrow['fld_admin_phone'] ?></td>
+                                <td><?php echo $readrow['fld_admin_address'] ?></td>
                                 <td>
-                                    <a href="admins.php?edit=<?php echo $readrow['fld_admin_id']; ?>" class="btn btn-success btn-xs" role="button">Edit</a>
-                                    <a href="admins.php?delete=<?php echo $readrow['fld_admin_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
-                                </td>
+                                     <a href="admins.php?edit=<?php echo $readrow['fld_admin_id']; ?>" class="btn btn-success btn-xs" role="button" style="<?php if($_SESSION['admin']==false) echo 'display: none;' ?>" >Edit</a>
+                                     <a href="admins.php?delete=<?php echo $readrow['fld_admin_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button" style="<?php if($_SESSION['admin']==false) echo 'display: none;' ?>" >Delete</a>
+                              </td>
                             </tr>
-                        <?php  } ?>
-                    </tbody>
-
-                </table>
-            </div>
-        </div> <!-- row  -->
-
-
-
-
-    </div> <!-- container-fluid -->
+                        <?php 
+                    }
+                    ?>
+                </tbody>
+            </table>
+            
+        </div>
+    </div> <!-- row  -->
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                lengthMenu: [
-                    [5, 10, 20, 30, -1],
-                    [5, 10, 20, 30, 'All'],
-                ],
-            });
-        });
-    </script>
+</div> <!-- container-fluid -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+
+
+<script>
+   $(document).ready(function() {
+    $('#datatable').DataTable({
+        "lengthMenu": [
+        [5, 10, 20, 30, -1],
+        [5, 10, 20, 30, "All"]
+        ]
+    });
+});
+</script>
 </body>
 
 </html>
