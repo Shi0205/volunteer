@@ -51,7 +51,7 @@
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                         <strong>Error!</strong> Please enter a correct username and password. Note that both fields may be case sensitive.</div>';
                 } ?>
-                <form action="staffcrud.php" method="post" class="form-horizontal" style="margin-bottom: 20px;">
+                <form action="newpost_crud.php" method="post" class="form-horizontal" style="margin-bottom: 20px;">
                     <div class="form-group">
                         <label for="title" class="col-sm-3 control-label">Title</label>
                         <div class="col-sm-9">

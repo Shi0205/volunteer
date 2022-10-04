@@ -22,9 +22,10 @@ if (isset($_POST['submit'])) {
         $stmt->bindParam(":noofvolunteer", $noofvolunteer, PDO::PARAM_INT);
 
         $stmt->execute();
+        header("Location:post.php?success=true");
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
+        header("Location:post.php?msg=" . $e->getMessage());
     }
     $conn = null;
-    header("Location:post.php");
 }

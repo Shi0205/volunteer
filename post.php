@@ -1,6 +1,9 @@
 <?php
 include_once 'database.php';
 session_start();
+if (!isset($_SESSION["id"])) {
+    header("Location: login.php");
+}
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
