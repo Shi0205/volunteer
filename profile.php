@@ -52,6 +52,8 @@ $conn = null;
           <!-- Latest compiled and minified JavaScript -->
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
           </script>
+          
+          <link rel="stylesheet" href="styles.css">
         
  
 
@@ -59,20 +61,24 @@ $conn = null;
     <body>
         
         <?php include_once 'nav_bar.php';
-        if (isset($_GET['success'])) {
-            if ($_GET['success'] == "true") {
-            echo '<div id="errorlogin" class="alert alert-success alert-dismissible" role="alert">
+        if (isset($_SESSION['SuccessUpdate'])) {
+            if ($_SESSION['SuccessUpdate'] == true) {
+            echo '<div id="updateSuccess" class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            <strong>Success!</strong> You have successfully unregistered the event</div>';
+            <strong>Success!</strong> You have successfully updated your profile !</div>';
+             unset($_SESSION['SuccessUpdate'] );
             }
+            
+           
         }
-        if (isset($_GET['success'])) {
-            if ($_GET['success'] == "false") {
+        if (isset($_SESSION['SuccessUpdate'])) {
+            if ($_SESSION['SuccessUpdate'] == false) {
             echo '<div id="errorlogin" class="alert alert-danger alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <strong>Error!</strong>' . $_GET['msg'] . ' </div>';
+            <strong>Error!</strong> Please Try Again !  </div>'; 
+            unset($_SESSION['SuccessUpdate'] );
             }
         }
         ?>
@@ -116,8 +122,18 @@ $conn = null;
                      <div class="form-group">
                         <label for="passwordd" class="col-sm-3  control-label">Password : </label>
                         <div class="col-sm-9">
-                            <input type="password" name="passwordd" class="form-control" id="passwordd" placeholder="Password" value="<?php echo $readresult['fld_user_password']; ?>" required>
+                            <input type="password" name="passwordd" class="form-control" id="passwordd" aria-describedby="pswdhelp" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$" placeholder="Password" value="<?php echo $readresult['fld_user_password']; ?>" required>
+                            <small id="pswdhelp" class="form-text text-muted">
+                                <ul>
+                                     <li>At least 1 Uppercase</li>
+                                     <li>At least 1 Lowercase</li>
+                                     <li>At least 1 Number</li>
+                                     <li>At least 1 Symbol, symbol allowed --> !@#$%^&*_=+-</li>
+                                     <li>Min 8 chars and Max 20 chars</li>
+                                     </ul>
+                            </small>
                         </div>
+                        
                     </div>
                     
                      <div class="form-group">
