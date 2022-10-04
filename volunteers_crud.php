@@ -51,7 +51,7 @@ if (isset($_SESSION['login'])) {
     
       // Update
     if (isset($_POST['update'])) {
-        if ($_SESSION['admin'] == true) {
+        if ($_SESSION['admin'] == false) {
             try {
                 $conn->beginTransaction();
 
@@ -83,10 +83,12 @@ if (isset($_SESSION['login'])) {
                 $stmt2->bindParam(":pswd", $pswd, PDO::PARAM_STR);
                 $stmt2->execute();
                 $conn->commit();
+                $_SESSION['SuccessUpdate'] = true;
                 
                 
             } catch (PDOException $e) {
                 $conn->rollback();
+                $_SESSION['SuccessUpdate'] = false;
                 echo "Error: " . $e->getMessage();
             }
         }
