@@ -132,7 +132,7 @@ if (isset($_SESSION['admin'])) {
         </div> <!-- row  -->
 
         <div class="row">
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
                 <div class="page-header"><br>
                     <h2>Volunteer List</h2>
                 </div>
