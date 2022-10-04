@@ -1,6 +1,5 @@
 <?php
 include_once 'admins_crud.php';
-include_once 'nav_bar.php';
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -37,7 +36,10 @@ if (isset($_SESSION['admin'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Star Tech : Admins</title>
+    <title>Admins</title>
+
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/616/616490.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -54,7 +56,7 @@ if (isset($_SESSION['admin'])) {
 </head>
 
 <body>
-
+    <?php include_once 'nav_bar.php'; ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-sm-9 col-sm-offset-1 col-md-7 col-md-offset-2">
@@ -133,7 +135,7 @@ if (isset($_SESSION['admin'])) {
             </div>
         </div> <!-- row  -->
 
-         <div class="row">
+        <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
                 <div class="page-header"><br>
                     <h2>Admins List</h2>
@@ -156,57 +158,57 @@ if (isset($_SESSION['admin'])) {
                     </thead>
                     <tbody>
                         <?php
-      
-                    foreach ($result as $readrow) {
-                       ?>
+
+                        foreach ($result as $readrow) {
+                        ?>
                             <tr>
                                 <td><?php echo $readrow['fld_admin_id'] ?></td>
                                 <td><?php echo $readrow['fld_admin_fname'] ?></td>
-                                <td><?php echo $readrow['fld_admin_lname'] ?></td> 
+                                <td><?php echo $readrow['fld_admin_lname'] ?></td>
                                 <td><?php echo $readrow['fld_admin_email'] ?></td>
                                 <td><?php echo $readrow['fld_admin_gender'] ?></td>
                                 <td><?php echo $readrow['fld_admin_phone'] ?></td>
                                 <td><?php echo $readrow['fld_admin_address'] ?></td>
                                 <td>
-                                     <a href="admins.php?edit=<?php echo $readrow['fld_admin_id']; ?>" class="btn btn-success btn-xs" role="button" style="<?php if($_SESSION['admin']==false) echo 'display: none;' ?>" >Edit</a>
-                                     <a href="admins.php?delete=<?php echo $readrow['fld_admin_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button" style="<?php if($_SESSION['admin']==false) echo 'display: none;' ?>" >Delete</a>
-                              </td>
+                                    <a href="admins.php?edit=<?php echo $readrow['fld_admin_id']; ?>" class="btn btn-success btn-xs" role="button" style="<?php if ($_SESSION['admin'] == false) echo 'display: none;' ?>">Edit</a>
+                                    <a href="admins.php?delete=<?php echo $readrow['fld_admin_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button" style="<?php if ($_SESSION['admin'] == false) echo 'display: none;' ?>">Delete</a>
+                                </td>
                             </tr>
-                        <?php 
-                    }
-                    ?>
-                </tbody>
-            </table>
-            
-        </div>
-    </div> <!-- row  -->
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div> <!-- row  -->
 
 
 
 
-</div> <!-- container-fluid -->
+    </div> <!-- container-fluid -->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 
-<script>
-   $(document).ready(function() {
-    $('#datatable').DataTable({
-        "lengthMenu": [
-        [5, 10, 20, 30, -1],
-        [5, 10, 20, 30, "All"]
-        ]
-    });
-});
-</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable({
+                "lengthMenu": [
+                    [5, 10, 20, 30, -1],
+                    [5, 10, 20, 30, "All"]
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>

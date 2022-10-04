@@ -12,7 +12,10 @@ if (isset($_SESSION['id'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Star Tech : Login </title>
+  <title>Login </title>
+
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/616/616490.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -91,8 +94,8 @@ if (isset($_SESSION['id'])) {
                 <p>
                   <button class="btn btn-primary btn-lg btn-block" id="btnsign" type="submit" name="login">Login</button>
                   <hr>
-                  <P>Haven't register yet ? </P>
-                  <a class="btn btn-info btn-lg btn-block" id="btnsign" href="register.php">Register</a>
+                <P>Haven't register yet ? </P>
+                <a class="btn btn-info btn-lg btn-block" id="btnsign" href="register.php">Register</a>
               </div>
             </div>
           </form>
