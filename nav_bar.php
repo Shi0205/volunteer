@@ -37,6 +37,7 @@
               <li><a href="volunteers.php" style="<?php if (isset($_SESSION['admin'])) if (!$_SESSION['admin'] == true) echo 'display: none;' ?>">Volunteer</a></li>
               <li><a href="admins.php" style="<?php if (isset($_SESSION['admin'])) if (!$_SESSION['admin'] == true) echo 'display: none;' ?>">Admin</a></li>
               <li><a href="archivedevent.php" style="<?php if (isset($_SESSION['admin'])) if (!$_SESSION['admin'] == true) echo 'display: none;' ?>">Archived Event</a></li>
+              <li><a href="profile.php" style="<?php if (isset($_SESSION['admin'])) if ($_SESSION['admin'] == true) echo 'display: none;' ?>">Profile</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="logout.php">Logout</a></li>
               <!--  <li><?php echo $_SESSION['name'] . " " . $_SESSION['id'] ?></li> -->
