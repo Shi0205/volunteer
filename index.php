@@ -58,6 +58,8 @@ try {
       .bg-1, .bg-2{
         margin-bottom: 0px;
         margin-top: 30px;
+        margin-left:0px;
+        margin-right:0px;
         padding: 0px 20px;
       }
       
@@ -87,23 +89,27 @@ try {
           padding-bottom: 20px;
       }
       
-      .bg-5 {
-      /*background-color: #2f2f2f;*/
-      background-color: #4f9a94;
-      color: #ffffff;
-      }
+
       
-      .social-div {
+     .social-div {
           border-bottom: 1px solid;
           margin-bottom: 5px;
       }
      
-    footer.glyphicon {
+    .bg-5 {
+      /*background-color: #2f2f2f;*/
+      background-color: #4f9a94;
+      color: #ffffff;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      padding-left: 50px;
+ }
+
+footer.glyphicon {
       font-size: 20px;
       margin-bottom: 20px;
       color: #ffffff;
-      
-    } 
+} 
     
     .center {
         text-align: center;
