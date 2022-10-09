@@ -63,7 +63,7 @@ $conn = null;
 
 </head>
 
-<body id="myPage>
+<body id="myPage">
     <?php
     include_once 'nav_bar.php';
 
