@@ -52,12 +52,28 @@ $conn = null;
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
           
-          
+      <style>
+    .bg-5 {
+      /*background-color: #2f2f2f;*/
+      background-color: #4f9a94;
+      color: #ffffff;
+      margin-top: 30px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      padding-left: 50px;
+    }
+
+    footer.glyphicon {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #ffffff;
+    } 
+ </style>     
         
  
 
     </head>
-    <body>
+    <body id="myPage">
         
         <?php include_once 'nav_bar.php';
         if (isset($_SESSION['SuccessUpdate'])) {
@@ -182,7 +198,12 @@ $conn = null;
             </div> <!-- row -->
         </div> <!-- container -->
         
-        
+  <footer class="container-fluid bg-5 text-center">
+    <a href="#myPage" title="To Top">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>Copyright @ Star Tech's Website 2022 </p>
+</footer>
         
         
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
