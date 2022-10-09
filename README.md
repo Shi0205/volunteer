@@ -1,8 +1,17 @@
-# volunteer
+# Star Tech : Volunteer App
 
 Simple code. 
 
-Lack :
-- Index : design
-- Footer : design
+Contain:
+- Login 
+- Register 
+- Index 
+- List of Post
+- Admin Page
+- Volunteer Page
+- Archieved Event 
+- Registered Event
+- Profile
+- Logout
 
+@ 9/10/2022
